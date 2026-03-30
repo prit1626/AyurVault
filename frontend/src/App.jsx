@@ -4,6 +4,8 @@ import Login from './pages/Login';
 import Register from './pages/Register';
 import Dashboard from './pages/Dashboard';
 import ProtectedRoute from './routes/ProtectedRoute';
+import PublisherRoute from './routes/PublisherRoute';
+import PublisherDashboard from './pages/publisher/PublisherDashboard';
 
 function App() {
   return (
@@ -18,6 +20,46 @@ function App() {
             <ProtectedRoute>
               <Dashboard />
             </ProtectedRoute>
+          } 
+        />
+        <Route 
+          path="/publisher/dashboard" 
+          element={
+            <PublisherRoute>
+              <PublisherDashboard />
+            </PublisherRoute>
+          } 
+        />
+        <Route 
+          path="/publisher/upload" 
+          element={
+            <PublisherRoute>
+              <PublisherDashboard />
+            </PublisherRoute>
+          } 
+        />
+        <Route 
+          path="/publisher/mynotes" 
+          element={
+            <PublisherRoute>
+              <PublisherDashboard />
+            </PublisherRoute>
+          } 
+        />
+        <Route 
+          path="/publisher/analytics" 
+          element={
+            <PublisherRoute>
+              <PublisherDashboard />
+            </PublisherRoute>
+          } 
+        />
+        <Route 
+          path="/publisher/earnings" 
+          element={
+            <PublisherRoute>
+              <PublisherDashboard />
+            </PublisherRoute>
           } 
         />
       </Routes>

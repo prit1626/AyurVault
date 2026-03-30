@@ -25,10 +25,27 @@ const Login = () => {
         e.preventDefault();
         try {
             const data = await authService.login(email, password);
+            console.log("Login successful, response data:", data);
+            
             if (data && data.token) {
                 localStorage.setItem("token", data.token);
+                // The authService already stores 'user' in localStorage
             }
-            navigate('/dashboard');
+
+            // Extract role - handle both formats (Role object or string)
+            const role = data.role?.name || data.role || "";
+            console.log("Extracted role:", role);
+
+            if (role === "ADMIN") {
+                console.log("Redirecting to Admin Dashboard");
+                navigate('/admin/dashboard');
+            } else if (role === "PUBLISHER") {
+                console.log("Redirecting to Publisher Dashboard");
+                navigate('/publisher/dashboard');
+            } else {
+                console.log("Redirecting to Student Dashboard");
+                navigate('/dashboard');
+            }
         } catch (error) {
             alert('Failed to login. Please check your credentials.');
         }

@@ -33,7 +33,12 @@ public class JwtService {
     }
 
     public String generateToken(UserDetails userDetails) {
-        return generateToken(new HashMap<>(), userDetails);
+        Map<String, Object> extraClaims = new HashMap<>();
+        // Extract role from authorities (CustomUserDetailsService adds ROLE_ prefix)
+        userDetails.getAuthorities().forEach(authority -> {
+            extraClaims.put("role", authority.getAuthority());
+        });
+        return generateToken(extraClaims, userDetails);
     }
 
     public String generateToken(Map<String, Object> extraClaims, UserDetails userDetails) {
